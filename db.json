@@ -1,0 +1,25 @@
+{
+  "tarefas": [
+    {
+      "id": 1,
+      "titulo": "Reunião",
+      "data": "2026-03-15"
+      
+    },
+    {
+      "id": 2,
+      "titulo": "Fazer compras",
+      "data": "2026-05-16"
+    },
+    {
+      "id": 3,
+      "titulo": "Enviar relatório",
+      "data": "2026-04-15"
+    },
+    {
+      "id": 4,
+     "titulo": "Revisar código",
+      "data": "2026-01-15"
+    }
+  ]
+}
