@@ -1,4 +1,4 @@
-import Add from "./Add"
+import { useState } from "react";
 
 function Tarefas({tarefas, setTarefas}) {
 
@@ -19,12 +19,51 @@ function Tarefas({tarefas, setTarefas}) {
     setTarefas(newDelete);
   }
 
-  
+  function onAddSubmit (titulo, data){
+        const newTarefa = {
+            id: titulo.length + 1,
+            titulo: titulo,
+            data: data
+        };
+        setTarefas([...tarefas, newTarefa]);
+
+    }
+    const [titulo, setTitulo] = useState("");
+    const [data, setData] = useState("");
+
+
 
 
 
   return (
     <div>
+      
+      <div className="bg-white rounded-lg m-2 p-4">
+                  <input className="w-full max-w-xl my-1 p-2 box-border border border-gray-300 rounded
+                    focus:outline-none focus:ring-2 focus:ring-blue-400 "
+                    type="text"
+                    name="pesquisar"
+                    id="pesquisar"
+                    placeholder="Digite o nome da tarefa"
+                     value={titulo}
+                     onChange={(event) => setTitulo(event.target.value)} />
+
+                    <input type="date" 
+                    name="" 
+                    id="" 
+                    value={data} 
+                    onChange={(event) => setData(event.target.value)} />
+                    
+                    <div className="flex items-center justify-center mt-2">
+                      <button onClick={() => onAddSubmit(titulo, data)}
+                      type="button"
+                      className=" bg-blue-500 hover:bg-blue-600
+                       h-8 w-20 rounded-lg cursor-pointer" >Adicionar</button>
+                    </div>
+            </div> 
+
+
+
       <div className="bg-white m-2 p-4 rounded-lg space-y-6">
         <h2>Minhas tarefas</h2>
         <hr />
@@ -59,7 +98,7 @@ function Tarefas({tarefas, setTarefas}) {
         </div>
       </div>
 
-      <Add />
+      
     </div>
   )
 }

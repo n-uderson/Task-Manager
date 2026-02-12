@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
 import Tarefas from "./assets/components/Tarefas"
+import Nav from "./assets/components/Nav"
+
 
 
 function App() {
+  
+   
+
+
   const [tarefas, setTarefas] = useState([])
 
   useEffect(() => {
@@ -16,10 +22,12 @@ function App() {
     <div className='min-h-screen bg-gray-200'>
       <div className='bg-blue-400 flex justify-between items-center p-4'>
         
+      <Nav  />
         <h1>Task Manager</h1>
         <i className="fa-regular fa-bell cursor-pointer"></i>
       </div>
       <Tarefas tarefas={tarefas} setTarefas={setTarefas}/>
+      
     </div>
   )
 }
