@@ -55,7 +55,15 @@ function Tarefas({tarefas, setTarefas}) {
                     onChange={(event) => setData(event.target.value)} />
                     
                     <div className="flex items-center justify-center mt-2">
-                      <button onClick={() => onAddSubmit(titulo, data)}
+                      <button onClick={() => {
+                        if (!titulo.trim() || !data.trim()) {
+                           return alert("Por favor, preencha todos os campos.");
+                         
+                        }
+                        onAddSubmit(titulo, data);
+                        setTitulo("");
+                        setData("");
+                      }}
                       type="button"
                       className=" bg-blue-500 hover:bg-blue-600
                        h-8 w-20 rounded-lg cursor-pointer" >Adicionar</button>
