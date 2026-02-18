@@ -1,7 +1,8 @@
 import { useState } from "react";
+import ButtomEdit from "../ButtomEdit";
 
 function Tarefas({tarefas, setTarefas}) {
-
+  // Confrima uma tarefa concluida
   function onConfClick(tarefaId){
     const newConf = tarefas.map(tarefa => {
       if (tarefa.id === tarefaId) {
@@ -14,11 +15,13 @@ function Tarefas({tarefas, setTarefas}) {
 
   }
 
+  // Deleta uma tarefa
   function onDeleteClick(tarefaId){
     const newDelete = tarefas.filter(tarefa => tarefa.id !== tarefaId)
     setTarefas(newDelete);
   }
 
+  // Adiciona uma nova ratefa na lista de tarefas
   function onAddSubmit (titulo, data){
         const newTarefa = {
             id: titulo.length + 1,
@@ -31,7 +34,9 @@ function Tarefas({tarefas, setTarefas}) {
     const [titulo, setTitulo] = useState("");
     const [data, setData] = useState("");
 
-
+    // Edita uma tarefa 
+    
+    
 
 
 
@@ -92,11 +97,10 @@ function Tarefas({tarefas, setTarefas}) {
                 </div>
               </div>
                 
-              <div className="space-x-4 flex-shrink-0">
+              <div className="space-x-4 flex flex-row">
                 
-                <button className="cursor-pointer hover:text-blue-500" aria-label="Editar">
-                  <i className="fa-solid fa-pen-to-square"></i>
-                </button>
+               <ButtomEdit/>
+
                 <button onClick={() => onDeleteClick(tarefa.id)} className="cursor-pointer hover:text-red-500" aria-label="Excluir">
                   <i className="fa-solid fa-trash"></i>
                 </button>
