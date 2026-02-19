@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ButtomEdit from "../ButtomEdit";
+import ButtomEdit from "./ButtomEdit";
 
 function Tarefas({tarefas, setTarefas}) {
   // Confrima uma tarefa concluida
@@ -35,7 +35,12 @@ function Tarefas({tarefas, setTarefas}) {
     const [data, setData] = useState("");
 
     // Edita uma tarefa 
-    
+    const handleSaveEdit = (id, novoTitulo) => {
+      const atualizadas = tarefas.map((t) => 
+        t.id === id ? { ...t, titulo: novoTitulo } : t
+      );
+      setTarefas(atualizadas);
+    };
     
 
 
@@ -99,7 +104,7 @@ function Tarefas({tarefas, setTarefas}) {
                 
               <div className="space-x-4 flex flex-row">
                 
-               <ButtomEdit/>
+               <ButtomEdit tarefa={tarefa} onSave={handleSaveEdit}/>
 
                 <button onClick={() => onDeleteClick(tarefa.id)} className="cursor-pointer hover:text-red-500" aria-label="Excluir">
                   <i className="fa-solid fa-trash"></i>
