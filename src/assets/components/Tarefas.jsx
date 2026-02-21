@@ -1,45 +1,84 @@
-import { useState } from "react";
-import ButtomEdit from "./ButtomEdit";
+import { useState,  } from "react";
+import ButtonEdit from "./ButtonEdit";
 
 function Tarefas({tarefas, setTarefas}) {
   // Confrima uma tarefa concluida
-  function onConfClick(tarefaId){
-    const newConf = tarefas.map(tarefa => {
-      if (tarefa.id === tarefaId) {
-        return {...tarefa, conf: !tarefa.conf}
-
-      }
-      return tarefa
-    })
-    setTarefas(newConf);
-
+  async function onConfClick(tarefaId){
+    try {
+      const tarefa = tarefas.find(t => t.id === tarefaId);
+      const novoStatus = !tarefa.conf;
+      
+      const response = await fetch(`http://localhost:3001/tarefas/${tarefaId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...tarefa, conf: novoStatus })
+      });
+      if (!response.ok) throw new Error('Erro ao atualizar tarefa');
+      
+      const newConf = tarefas.map(t => 
+        t.id === tarefaId ? {...t, conf: novoStatus} : t
+      );
+      setTarefas(newConf);
+    } catch (error) {
+      console.error('Erro:', error);
+    }
   }
 
   // Deleta uma tarefa
-  function onDeleteClick(tarefaId){
-    const newDelete = tarefas.filter(tarefa => tarefa.id !== tarefaId)
-    setTarefas(newDelete);
+  async function onDeleteClick(tarefaId){
+    try {
+      const response = await fetch(`http://localhost:3001/tarefas/${tarefaId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      if (!response.ok) throw new Error('Erro ao deletar tarefa');
+      const newDelete = tarefas.filter(tarefa => tarefa.id !== tarefaId);
+      setTarefas(newDelete);
+    } catch (error) {
+      console.error('Erro:', error);
+    }
   }
 
-  // Adiciona uma nova ratefa na lista de tarefas
-  function onAddSubmit (titulo, data){
-        const newTarefa = {
-            id: titulo.length + 1,
-            titulo: titulo,
-            data: data
-        };
-        setTarefas([...tarefas, newTarefa]);
-
+  // Adiciona uma nova tarefa na lista de tarefas
+  async function onAddSubmit (titulo, data){
+    try {
+      const response = await fetch('http://localhost:3001/tarefas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          titulo: titulo,
+          data: data,
+          conf: false
+        })
+      });
+      if (!response.ok) throw new Error('Erro ao adicionar tarefa');
+      const newTarefa = await response.json();
+      setTarefas([...tarefas, newTarefa]);
+    } catch (error) {
+      console.error('Erro:', error);
     }
+  }
     const [titulo, setTitulo] = useState("");
     const [data, setData] = useState("");
 
     // Edita uma tarefa 
-    const handleSaveEdit = (id, novoTitulo) => {
-      const atualizadas = tarefas.map((t) => 
-        t.id === id ? { ...t, titulo: novoTitulo } : t
-      );
-      setTarefas(atualizadas);
+    const handleSaveEdit = async (id, novoTitulo, novaData) => {
+      try {
+        const tarefa = tarefas.find(t => t.id === id);
+        const response = await fetch(`http://localhost:3001/tarefas/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...tarefa, titulo: novoTitulo, data: novaData })
+        });
+        if (!response.ok) throw new Error('Erro ao editar tarefa');
+        
+        const atualizadas = tarefas.map((t) => 
+          t.id === id ? { ...t, titulo: novoTitulo, data: novaData } : t
+        );
+        setTarefas(atualizadas);
+      } catch (error) {
+        console.error('Erro:', error);
+      }
     };
     
 
@@ -104,7 +143,7 @@ function Tarefas({tarefas, setTarefas}) {
                 
               <div className="space-x-4 flex flex-row">
                 
-               <ButtomEdit tarefa={tarefa} onSave={handleSaveEdit}/>
+               <ButtonEdit tarefa={tarefa} onSave={handleSaveEdit}/>
 
                 <button onClick={() => onDeleteClick(tarefa.id)} className="cursor-pointer hover:text-red-500" aria-label="Excluir">
                   <i className="fa-solid fa-trash"></i>

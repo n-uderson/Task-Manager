@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 
-function ButtomEdit({tarefa, onSave}) {
+function ButtonEdit({tarefa, onSave, data}) {
     const [editOpen, setEditOpen] = useState(false);
     const [draft, setDraft] = useState(tarefa?.titulo ?? "");
+    const [draftData, setDraftData] = useState(tarefa?.data ?? "");
 
     const saveEdit = () => {
-        if (draft.trim()) {
-            onSave(tarefa.id, draft.trim());
+        if (draft.trim() && draftData.trim()) {
+            onSave(tarefa.id, draft.trim(), draftData.trim());
         }
         setEditOpen(false);
     }
+
+    
+
     
     return (
         <div>
             <button onClick={() => {
                 setEditOpen(!editOpen);
                 setDraft(tarefa.titulo);
+                setDraftData(tarefa.data);
             }} 
             className="cursor-pointer hover:text-blue-500" 
             aria-label="Editar">
@@ -36,11 +41,19 @@ function ButtomEdit({tarefa, onSave}) {
                         onChange={(e) => setDraft(e.target.value)}
                         autoFocus
                     />
+                    <div className="flex flex-col gap-1 mb-4">
+                  
+                  <input type="date" 
+                  name="date"
+                   id="date" 
+                   value={draftData} 
+                   onChange={(e) => setDraftData(e.target.value)} />
+                </div>
                     <div className='flex gap-3 justify-end'>
                         <button onClick={() => setEditOpen(false)} className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg cursor-pointer">
                             Cancelar
                         </button>
-                        <button onClick={() => saveEdit()} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer">
+                        <button onClick={() => { saveEdit()}} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer">
                             Salvar
                         </button>
                     </div>
@@ -51,4 +64,4 @@ function ButtomEdit({tarefa, onSave}) {
     );
 }
 
-export default ButtomEdit;
+export default ButtonEdit;

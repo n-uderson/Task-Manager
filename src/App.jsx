@@ -12,17 +12,24 @@ function App() {
   const [tarefas, setTarefas] = useState([])
 
   useEffect(() => {
-    
-    fetch('/db.json')
-      .then(res => res.json())
-      .then(data => setTarefas(data.tarefas))
+    const fetchTarefas = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/tarefas', { method: 'GET' });
+        if (!response.ok) throw new Error('Erro ao buscar tarefas');
+        const data = await response.json();
+        setTarefas(data);
+      } catch (error) {
+        console.error('Erro:', error);
+      }
+    };
+    fetchTarefas();
   }, [])
   
   return (
     <div className='min-h-screen bg-gray-200'>
       <div className='bg-blue-400 flex justify-between items-center p-4'>
         
-      <Nav  />
+      
         <h1>Task Manager</h1>
         <i className="fa-regular fa-bell cursor-pointer"></i>
       </div>
