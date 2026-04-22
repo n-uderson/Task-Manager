@@ -86,8 +86,8 @@ function Tarefas({ tarefas, setTarefas }) {
   };
 
   return (
-    <div >
-      <div className="bg-slate-800 rounded-lg m-2 p-4 gap-2 flex flex-col">
+    <div className="mt-8 md:flex md:flex-row">
+      <div className="bg-slate-800 rounded-lg m-2 p-4 gap-2 flex flex-col md:w-1/3 md:h-62 ">
         <h2 className="text-white">Nova Tarefa</h2>
         <input
           className="w-full max-w-xl my-1 p-2 box-border border text-white rounded
@@ -101,7 +101,7 @@ function Tarefas({ tarefas, setTarefas }) {
         />
 
         <input
-          className="text-white box-border border w-full max-w-xl my-1 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="text-white box-border border w-full max-w-xl my-1 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 scheme-dark"
           type="date"
           name=""
           id=""
@@ -128,7 +128,7 @@ function Tarefas({ tarefas, setTarefas }) {
         </div>
       </div>
 
-      <div className="bg-slate-800  m-2 p-4 rounded-lg space-y-6">
+      <div className="bg-slate-800  m-2 p-4 rounded-lg space-y-6 md:w-full">
         <h2 className="text-white">Minhas tarefas</h2>
         <hr className="text-slate-300" />
         <div className="  flex flex-col space-y-5">
@@ -158,10 +158,10 @@ function Tarefas({ tarefas, setTarefas }) {
 
                 <button
                   onClick={() => onDeleteClick(tarefa.id)}
-                  className="cursor-pointer hover:text-red-500"
+                  className="cursor-pointer "
                   aria-label="Excluir"
                 >
-                  <i className="text-slate-300 fa-solid fa-trash"></i>
+                  <i className="text-slate-300 fa-solid fa-trash hover:text-red-500"></i>
                 </button>
               </div>
             </div>

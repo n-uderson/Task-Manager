@@ -27,8 +27,10 @@ function ButtonEdit({ tarefa, onSave, data }) {
       </button>
       {editOpen && (
         <div className="fixed inset-0  flex items-center justify-center z-50">
-          <div className="bg-blue-400 rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h2 className="text-lg font-semibold mb-4">Editar Tarefa</h2>
+          <div className="bg-slate-600 rounded-lg shadow-lg p-6 w-full max-w-md">
+            <h2 className="text-white text-lg font-semibold mb-4">
+              Editar Tarefa
+            </h2>
             <input
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4"
               type="text"
@@ -39,7 +41,7 @@ function ButtonEdit({ tarefa, onSave, data }) {
               onChange={(e) => setDraft(e.target.value)}
               autoFocus
             />
-            <div className="flex flex-col gap-1 mb-4">
+            <div className="text-white flex flex-col gap-1 mb-4 scheme-dark">
               <input
                 type="date"
                 name="date"
@@ -51,7 +53,7 @@ function ButtonEdit({ tarefa, onSave, data }) {
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setEditOpen(false)}
-                className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded-lg cursor-pointer"
+                className="text-white bg-gray-400 hover:bg-gray-500 px-4 py-2 rounded-lg cursor-pointer"
               >
                 Cancelar
               </button>
