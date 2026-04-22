@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ButtonEdit from "./ButtonEdit";
+import BuscarTarefas from "./BuscarTarefas";
 
 function Tarefas({ tarefas, setTarefas }) {
   // Confrima uma tarefa concluida
@@ -85,6 +86,21 @@ function Tarefas({ tarefas, setTarefas }) {
     }
   };
 
+  // Filtra as tarefas de acordo com o filtro selecionado
+  const [filtro, setFiltro] = useState("todos");
+  const [buscar, setBuscar] = useState("");
+
+  const tarefasFiltradas = tarefas
+    .filter((t) => t.title.toLowerCase().includes(buscar.toLowerCase()))
+
+    .filter((t) => {
+      if (filtro === "pendentes") return !t.completed;
+      if (filtro === "concluidas") return t.completed;
+      return true;
+    });
+
+  // Tarefa atrasada
+
   return (
     <div className="mt-8 md:flex md:flex-row">
       <div className="bg-slate-800 rounded-lg m-2 p-4 gap-2 flex flex-col md:w-1/3 md:h-62 ">
@@ -131,74 +147,76 @@ function Tarefas({ tarefas, setTarefas }) {
       <div className="bg-slate-800  m-2 p-4 rounded-lg space-y-6 md:w-full">
         <h2 className="text-white">Minhas tarefas</h2>
         <hr className="text-slate-300" />
-        <div className="flex flex-col gap-4">
-          <input
-            type="text"
-            name="pesquisar"
-            id="pesquisar"
-            placeholder="Buscar tarefa..."
-            className="w-full max-w-xl my-1 p-2 box-border border text-white rounded
-          focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <div className="flex justify-around ">
-            <button
-              type="button"
-              className="bg-blue-500 hover:bg-blue-600  h-8 w-20 rounded-lg cursor-pointer"
-            >
-              Todos
-            </button>
-            <button
-              type="button"
-              className="bg-blue-500 hover:bg-blue-600  h-8 w-25 rounded-lg cursor-pointer"
-            >
-              Pendentes
-            </button>
 
-            <button
-              type="button"
-              className="bg-blue-500 hover:bg-blue-600  h-8 w-25 rounded-lg cursor-pointer"
-            >
-              Concluídas
-            </button>
-          </div>
-          <hr className="text-slate-300" />
-        </div>
+        <BuscarTarefas
+          filtro={filtro}
+          setFiltro={setFiltro}
+          buscar={buscar}
+          setBuscar={setBuscar}
+        />
 
         <div className="  flex flex-col space-y-5">
-          {tarefas.map((tarefa) => (
-            <div
-              key={tarefa.id}
-              className=" flex justify-between items-start gap-4 border-b border-slate-300 pb-4"
-            >
-              <div className="flex items-center gap-2 flex-1">
-                <div className="flex flex-col gap-1">
-                  <label
-                    onClick={() => onConfClick(tarefa.id)}
-                    className={`text-white  cursor-pointer ${tarefa.completed && "line-through"}`}
+          {tarefasFiltradas.map((tarefa) => {
+            const isAtrasada =
+              tarefa.date &&
+              !tarefa.completed &&
+              new Date(tarefa.date) < new Date();
+
+            return (
+              <div
+                key={tarefa.id}
+                className=" flex justify-between items-start gap-4 border-b border-slate-300 pb-4"
+              >
+                <div className="flex items-center gap-2 flex-1">
+                  <div className="flex flex-col gap-1">
+                    <label
+                      onClick={() => onConfClick(tarefa.id)}
+                      className={`text-white  cursor-pointer ${tarefa.completed && "line-through"}`}
+                    >
+                      {tarefa.title}
+                    </label>
+
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="text-sm text-slate-300 font-light">
+                        {tarefa.date
+                          ? new Date(tarefa.date).toLocaleDateString()
+                          : ""}
+                      </span>
+                      {isAtrasada && (
+                        <span className="text-sm text-red-500 font-light ml-2">
+                          Atrasada
+                        </span>
+                      )}
+
+                      {tarefa.completed && !isAtrasada && (
+                        <span className="text-sm text-green-500 font-light ml-2">
+                          Concluída
+                        </span>
+                      )}
+
+                      {!tarefa.completed && !isAtrasada && (
+                        <span className="text-sm text-yellow-500 font-light ml-2">
+                          Pendente
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-slate-300 space-x-4 flex flex-row">
+                  <ButtonEdit tarefa={tarefa} onSave={handleSaveEdit} />
+
+                  <button
+                    onClick={() => onDeleteClick(tarefa.id)}
+                    className="cursor-pointer "
+                    aria-label="Excluir"
                   >
-                    {tarefa.title}
-                  </label>
-                  <span className="text-sm text-slate-300 font-light">
-                    {tarefa.date
-                      ? new Date(tarefa.date).toLocaleDateString()
-                      : ""}
-                  </span>
+                    <i className="text-slate-300 fa-solid fa-trash hover:text-red-500"></i>
+                  </button>
                 </div>
               </div>
-
-              <div className="text-slate-300 space-x-4 flex flex-row">
-                <ButtonEdit tarefa={tarefa} onSave={handleSaveEdit} />
-
-                <button
-                  onClick={() => onDeleteClick(tarefa.id)}
-                  className="cursor-pointer "
-                  aria-label="Excluir"
-                >
-                  <i className="text-slate-300 fa-solid fa-trash hover:text-red-500"></i>
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
