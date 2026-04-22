@@ -121,7 +121,7 @@ function Tarefas({ tarefas, setTarefas }) {
             }}
             type="button"
             className=" bg-blue-500 hover:bg-blue-600
-                       h-8 w-20 rounded-lg cursor-pointer"
+                       h-8 w-25 rounded-lg cursor-pointer"
           >
             Adicionar
           </button>
@@ -131,6 +131,39 @@ function Tarefas({ tarefas, setTarefas }) {
       <div className="bg-slate-800  m-2 p-4 rounded-lg space-y-6 md:w-full">
         <h2 className="text-white">Minhas tarefas</h2>
         <hr className="text-slate-300" />
+        <div className="flex flex-col gap-4">
+          <input
+            type="text"
+            name="pesquisar"
+            id="pesquisar"
+            placeholder="Buscar tarefa..."
+            className="w-full max-w-xl my-1 p-2 box-border border text-white rounded
+          focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <div className="flex justify-around ">
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-600  h-8 w-20 rounded-lg cursor-pointer"
+            >
+              Todos
+            </button>
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-600  h-8 w-25 rounded-lg cursor-pointer"
+            >
+              Pendentes
+            </button>
+
+            <button
+              type="button"
+              className="bg-blue-500 hover:bg-blue-600  h-8 w-25 rounded-lg cursor-pointer"
+            >
+              Concluídas
+            </button>
+          </div>
+          <hr className="text-slate-300" />
+        </div>
+
         <div className="  flex flex-col space-y-5">
           {tarefas.map((tarefa) => (
             <div
