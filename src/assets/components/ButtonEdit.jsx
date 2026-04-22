@@ -18,7 +18,7 @@ function ButtonEdit({ tarefa, onSave, data }) {
         onClick={() => {
           setEditOpen(!editOpen);
           setDraft(tarefa.title);
-          setDraftData(tarefa.date);
+          setDraftData(tarefa.date ? tarefa.date.split("T")[0] : "");
         }}
         className="cursor-pointer hover:text-blue-500"
         aria-label="Editar"

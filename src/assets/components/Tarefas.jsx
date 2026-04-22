@@ -86,10 +86,11 @@ function Tarefas({ tarefas, setTarefas }) {
   };
 
   return (
-    <div>
-      <div className="bg-white rounded-lg m-2 p-4">
+    <div >
+      <div className="bg-slate-800 rounded-lg m-2 p-4 gap-2 flex flex-col">
+        <h2 className="text-white">Nova Tarefa</h2>
         <input
-          className="w-full max-w-xl my-1 p-2 box-border border border-gray-300 rounded
+          className="w-full max-w-xl my-1 p-2 box-border border text-white rounded
                     focus:outline-none focus:ring-2 focus:ring-blue-400 "
           type="text"
           name="pesquisar"
@@ -100,6 +101,7 @@ function Tarefas({ tarefas, setTarefas }) {
         />
 
         <input
+          className="text-white box-border border w-full max-w-xl my-1 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           type="date"
           name=""
           id=""
@@ -126,24 +128,24 @@ function Tarefas({ tarefas, setTarefas }) {
         </div>
       </div>
 
-      <div className="bg-white m-2 p-4 rounded-lg space-y-6">
-        <h2>Minhas tarefas</h2>
-        <hr />
-        <div className="flex flex-col space-y-5">
+      <div className="bg-slate-800  m-2 p-4 rounded-lg space-y-6">
+        <h2 className="text-white">Minhas tarefas</h2>
+        <hr className="text-slate-300" />
+        <div className="  flex flex-col space-y-5">
           {tarefas.map((tarefa) => (
             <div
               key={tarefa.id}
-              className="flex justify-between items-start gap-4 border-b border-gray-200 pb-4"
+              className=" flex justify-between items-start gap-4 border-b border-slate-300 pb-4"
             >
               <div className="flex items-center gap-2 flex-1">
                 <div className="flex flex-col gap-1">
                   <label
                     onClick={() => onConfClick(tarefa.id)}
-                    className={`cursor-pointer ${tarefa.completed && "line-through"}`}
+                    className={`text-white  cursor-pointer ${tarefa.completed && "line-through"}`}
                   >
                     {tarefa.title}
                   </label>
-                  <span className="text-sm text-gray-500 font-light">
+                  <span className="text-sm text-slate-300 font-light">
                     {tarefa.date
                       ? new Date(tarefa.date).toLocaleDateString()
                       : ""}
@@ -151,7 +153,7 @@ function Tarefas({ tarefas, setTarefas }) {
                 </div>
               </div>
 
-              <div className="space-x-4 flex flex-row">
+              <div className="text-slate-300 space-x-4 flex flex-row">
                 <ButtonEdit tarefa={tarefa} onSave={handleSaveEdit} />
 
                 <button
@@ -159,7 +161,7 @@ function Tarefas({ tarefas, setTarefas }) {
                   className="cursor-pointer hover:text-red-500"
                   aria-label="Excluir"
                 >
-                  <i className="fa-solid fa-trash"></i>
+                  <i className="text-slate-300 fa-solid fa-trash"></i>
                 </button>
               </div>
             </div>

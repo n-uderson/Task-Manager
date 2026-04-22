@@ -22,10 +22,10 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-200">
-      <div className="bg-blue-400 flex justify-between items-center p-4">
-        <h1>Task Manager</h1>
-        <i className="fa-regular fa-bell cursor-pointer"></i>
+    <div className="min-h-screen bg-slate-900">
+      <div className="bg-slate-800  p-4">
+        <h1 className="flex justify-center items-center text-white text-xl font-bold">Task Manager</h1>
+        {/* <i className="fa-regular fa-bell cursor-pointer text-white"></i> */}
       </div>
       <Tarefas tarefas={tarefas} setTarefas={setTarefas} />
     </div>
