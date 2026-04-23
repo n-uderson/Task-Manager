@@ -94,8 +94,11 @@ function Tarefas({ tarefas, setTarefas }) {
     .filter((t) => t.title.toLowerCase().includes(buscar.toLowerCase()))
 
     .filter((t) => {
-      if (filtro === "pendentes") return !t.completed;
+      const isAtrasada = 
+      t.date && !t.completed && new Date(t.date) < new Date();
+      if (filtro === "pendentes") return !t.completed && new Date(t.date) >= new Date();
       if (filtro === "concluidas") return t.completed;
+      if (filtro === "atrasadas") return isAtrasada;
       return true;
     });
 
@@ -198,7 +201,9 @@ function Tarefas({ tarefas, setTarefas }) {
                         <span className="text-sm text-yellow-500 font-light ml-2">
                           Pendente
                         </span>
+
                       )}
+                      
                     </div>
                   </div>
                 </div>

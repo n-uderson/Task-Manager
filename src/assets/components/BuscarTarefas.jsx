@@ -18,7 +18,7 @@ function BuscarTarefas({filtro, setFiltro, buscar, setBuscar}) {
           className="w-full max-w-xl my-1 p-2 box-border border text-white rounded
           focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
-        <div className="flex justify-around ">
+        <div className="flex justify-around gap-2 ">
           <button
             type="button"
             onClick={() => setFiltro("todos")}
@@ -52,6 +52,18 @@ function BuscarTarefas({filtro, setFiltro, buscar, setBuscar}) {
             }
           >
             Concluídas
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setFiltro("atrasadas")}
+            className={
+              filtro === "atrasadas"
+                ? "h-8 w-25 rounded-lg cursor-pointer bg-blue-500 text-white"
+                : "bg-slate-700 h-8 w-25 rounded-lg cursor-pointer"
+            }
+          >
+            Atrasadas
           </button>
         </div>
         <hr className="text-slate-300" />
