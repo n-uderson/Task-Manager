@@ -72,7 +72,12 @@ function Login() {
         >
           Entrar
         </button>
-        <p className="text-white text-sm ">Cadastre-se</p>
+        <p 
+        onClick={() => navigate("/register")}
+        className="text-white text-sm cursor-pointer hover:underline">
+          Não tem uma conta? Cadastre-se
+       
+          </p>
       </div>
     </div>
   );
