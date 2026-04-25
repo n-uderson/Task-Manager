@@ -16,6 +16,7 @@ function Login() {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      
       if (response.ok) {
         if (data.token) {
           localStorage.setItem("token", data.token);
@@ -24,6 +25,7 @@ function Login() {
             "✓ Token armazenado:",
             data.token.substring(0, 20) + "...",
           );
+          localStorage.setItem("user", JSON.stringify(data.user))
           navigate("/");
         } else {
           console.error("✗ Token não encontrado na resposta:", data);
