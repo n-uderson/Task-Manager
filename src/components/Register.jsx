@@ -2,6 +2,8 @@ import {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 
+
+
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] =useState("");
@@ -43,7 +45,7 @@ function Register() {
 
     return (
       <div className="bg-slate-900 h-screen flex items-center justify-center">
-        <div className="bg-slate-800 flex flex-col items-center justify-center gap-11 h-96 w-80 rounded-lg ">
+        <div className="bg-slate-800 flex flex-col items-center justify-center gap-4 p-2 w-80 rounded-lg ">
           <h1 className="text-white text-2xl font-semibold ">Cadastre-se</h1>
           <div className="p-4 flex flex-col gap-4 w-full  ">
             <input 

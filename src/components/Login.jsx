@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
+
+import imgmobile from "../assets/imagem-login.png";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -43,6 +45,7 @@ function Login() {
 
   return (
     <div className="bg-slate-900 h-screen flex items-center justify-center">
+      <img src={imgmobile} alt="Mobile" className="absolute top-0 left-0 w-full h-full object-cover opacity-20" />
       <div className="bg-slate-800 flex flex-col items-center justify-center gap-11 h-96 w-80 rounded-lg ">
         <h1 className="text-white text-3xl font-semibold ">Login</h1>
         <div className="p-4 flex flex-col gap-4 w-full  ">
@@ -74,12 +77,22 @@ function Login() {
         >
           Entrar
         </button>
-        <p 
+
+        <p className="text-white text-sm"> 
+          Não tem uma conta?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="cursor-pointer text-blue-400 hover:underline"
+          >
+            Cadastre-se
+          </span>
+        </p>
+        {/* <p 
         onClick={() => navigate("/register")}
         className="text-white text-sm cursor-pointer hover:underline">
-          Não tem uma conta? Cadastre-se
+          Cadastre-se
        
-          </p>
+          </p> */}
       </div>
     </div>
   );

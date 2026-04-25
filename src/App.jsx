@@ -1,13 +1,12 @@
-import {Routes, Route} from "react-router-dom"
-import Login from "./assets/components/Login";
-import Register from "./assets/components/Register";
-import Tarefas from "./assets/components/Tarefas";
-
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Tarefas from "./components/Tarefas";
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />      
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Tarefas />} />
     </Routes>
@@ -16,12 +15,9 @@ function App() {
 
 export default App;
 
-
-
-
 // import { useState, useEffect } from "react";
-// import Tarefas from "./assets/components/Tarefas";
-// import Nav from "./assets/components/Nav";
+// import Tarefas from "./components/Tarefas";
+// import Nav from "./components/Nav";
 
 // function App() {
 //   const [tarefas, setTarefas] = useState([]);

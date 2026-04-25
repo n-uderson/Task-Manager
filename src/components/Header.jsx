@@ -20,19 +20,17 @@ function Header() {
     
 
     return (
-      <div className="bg-slate-800  p-4 ">
-        <h1 className="flex justify-center items-center text-white text-xl font-bold">
+      <div className="bg-slate-800  p-4 md:relative flex  items-center">
+        <h1 className="md:absolute md:left-1/2 md:-translate-x-1/2 text-white text-xl font-bold">
           Task Manager
         </h1>
-        <p className="text-white">Olá, {user?.name} 👋</p>
-        <button
-          onClick={handleLogout}
-            
-          
-        >
-          Sair
-        </button> 
-         {/* <i className="fa-regular fa-bell cursor-pointer text-white"></i> */}
+        <div className=" flex gap-4 items-center ml-auto">
+          <p className="text-white">Olá, {user?.name} </p>
+          <button onClick={handleLogout}>
+            <i class="fa-solid fa-arrow-right-to-bracket text-white cursor-pointer"></i>
+          </button>
+        </div>
+        {/* <i className="fa-regular fa-bell cursor-pointer text-white"></i> */}
       </div>
     );
 }

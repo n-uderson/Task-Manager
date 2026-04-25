@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonEdit from "./ButtonEdit";
 import BuscarTarefas from "./BuscarTarefas";
-import Header from "./header";
-import ButtonDeletee from "./buttonDelete";
+import Header from "./Header";
+import ButtonDelete from "./ButtonDelete";
 
 function Tarefas() {
   const [tarefas, setTarefas] = useState([]);
@@ -66,7 +66,6 @@ function Tarefas() {
       setTarefas(newDelete);
 
       setOpenDel(false);
-
     } catch (error) {
       console.error("Erro:", error);
     }
@@ -135,14 +134,12 @@ function Tarefas() {
       return true;
     });
 
-    // Função de abrir p delete
-    const [openDel, setOpenDel] = useState(false);
-    const [tarefaSelecionada, setTarefaSelecionada] = useState(null);
-
+  // Função de abrir p delete
+  const [openDel, setOpenDel] = useState(false);
+  const [tarefaSelecionada, setTarefaSelecionada] = useState(null);
 
   return (
     <div className="bg-slate-900 h-screen">
-      
       <Header />
       <div className=" mt-8 md:flex md:flex-row ">
         <div className="bg-slate-800 rounded-lg m-2 p-4 gap-2 flex flex-col md:w-1/3 md:h-62  ">
@@ -237,19 +234,23 @@ function Tarefas() {
                   </div>
                   <div className="text-slate-300 space-x-4 flex flex-row">
                     <ButtonEdit tarefa={tarefa} onSave={handleSaveEdit} />
-                    <button onClick={() => {
-                      setOpenDel(true);
-                      setTarefaSelecionada(tarefa);
-                    }} className="cursor-pointer " aria-label="Excluir">
+                    <button
+                      onClick={() => {
+                        setOpenDel(true);
+                        setTarefaSelecionada(tarefa);
+                      }}
+                      className="cursor-pointer "
+                      aria-label="Excluir"
+                    >
                       <i className="text-slate-300 fa-solid fa-trash hover:text-red-500"></i>
                     </button>
                     {openDel && (
-                      <ButtonDeletee 
-                      tarefa={tarefaSelecionada}
-                      onDelete={onDeleteClick}
-                      onClose={() => setOpenDel(false)} />
-                     )}
-                    
+                      <ButtonDelete
+                        tarefa={tarefaSelecionada}
+                        onDelete={onDeleteClick}
+                        onClose={() => setOpenDel(false)}
+                      />
+                    )}
                   </div>
                 </div>
               );
