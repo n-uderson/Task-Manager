@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 import imgmobile from "../assets/imagem-login.png";
 
@@ -17,82 +17,97 @@ function Login() {
         },
         body: JSON.stringify({ email, password }),
       });
+
       const data = await response.json();
-      
+
       if (response.ok) {
         if (data.token) {
           localStorage.setItem("token", data.token);
-          console.log("✓ Login realizado com sucesso!");
-          console.log(
-            "✓ Token armazenado:",
-            data.token.substring(0, 20) + "...",
-          );
-          localStorage.setItem("user", JSON.stringify(data.user))
+          localStorage.setItem("user", JSON.stringify(data.user));
           navigate("/");
         } else {
-          console.error("✗ Token não encontrado na resposta:", data);
-          alert("Erro: Token não recebido do servidor");
+          alert("Token não recebido");
         }
       } else {
-        console.error("✗ Erro ao fazer login:", data.message);
-        alert("Erro ao fazer login: " + (data.message || response.statusText));
+        alert(data.message || "Erro ao fazer login");
       }
     } catch (error) {
-      console.error("✗ Erro na requisição de login:", error);
       alert("Erro ao conectar: " + error.message);
     }
   };
 
   return (
-    <div className="bg-slate-900 h-screen flex items-center justify-center">
-      <img src={imgmobile} alt="Mobile" className="absolute top-0 left-0 w-full h-full object-cover opacity-20" />
-      <div className="bg-slate-800 flex flex-col items-center justify-center gap-11 h-96 w-80 rounded-lg ">
-        <h1 className="text-white text-3xl font-semibold ">Login</h1>
-        <div className="p-4 flex flex-col gap-4 w-full  ">
-          <input
-            type="email"
-            name="Email"
-            id="Email"
-            placeholder="Digite seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className=" max-w-xl p-2 box-border border text-white rounded
-                    focus:outline-none focus:ring-2 focus:ring-blue-400 "
-          />
-          <input
-            type="password"
-            name="Password"
-            id="Password"
-            placeholder="Digite sua senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className=" max-w-xl  p-2 box-border border text-white rounded
-                    focus:outline-none focus:ring-2 focus:ring-blue-400 "
-          />
-        </div>
-        <button
-          onClick={handleLogin}
-          type="button"
-          className="bg-blue-500 hover:bg-blue-600  h-8 w-25 rounded-lg cursor-pointer"
-        >
-          Entrar
-        </button>
+    <div className="min-h-screen bg-slate-900 flex flex-col md:flex-row">
+      {/* IMAGEM */}
+      <div className="relative w-full md:w-1/2 flex items-center justify-center">
+        <img
+          src={imgmobile}
+          alt="Ilustração"
+          className="w-full md:max-w-  mt-6 md:mt-0"
+        />
 
-        <p className="text-white text-sm"> 
-          Não tem uma conta?{" "}
-          <span
-            onClick={() => navigate("/register")}
-            className="cursor-pointer text-blue-400 hover:underline"
+        {/* FADE MOBILE */}
+        <div
+          className="absolute bottom-0 left-0 w-full h-32 
+          bg-linear-to-b from-transparent to-slate-900 md:hidden"
+        ></div>
+
+        {/* FADE DESKTOP */}
+        <div
+          className="hidden md:block absolute top-0 right-0 h-full w-40
+          bg-linear-to-r from-transparent to-slate-900"
+        ></div>
+      </div>
+
+      {/* LOGIN */}
+      <div className="w-full md:w-1/2 flex items-center justify-center px-6">
+        <div className="w-full max-w-sm">
+          <h1 className="text-white text-3xl font-bold text-center md:text-left mb-2">
+            Task Manager
+          </h1>
+
+          <p className="text-slate-400 text-center md:text-left mb-6">
+            Organize. Planeje. Conquiste.
+          </p>
+
+          {/* INPUTS */}
+          <div className="flex flex-col gap-4">
+            <input
+              type="email"
+              placeholder="Digite seu email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="p-3 rounded-lg bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="p-3 rounded-lg bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          {/* BOTÃO */}
+          <button
+            onClick={handleLogin}
+            className="w-full mt-6 p-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:opacity-90"
           >
-            Cadastre-se
-          </span>
-        </p>
-        {/* <p 
-        onClick={() => navigate("/register")}
-        className="text-white text-sm cursor-pointer hover:underline">
-          Cadastre-se
-       
-          </p> */}
+            Entrar
+          </button>
+
+          {/* REGISTER */}
+          <p className="text-center md:text-left text-sm text-slate-400 mt-6">
+            Não tem uma conta?{" "}
+            <span
+              onClick={() => navigate("/register")}
+              className="text-blue-400 cursor-pointer hover:underline"
+            >
+              Cadastre-se
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );
