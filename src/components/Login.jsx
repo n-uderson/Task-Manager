@@ -38,7 +38,7 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col md:flex-row">
-      {/* IMAGEM */}
+      
       <div className="relative w-full md:w-1/2 flex items-center justify-center">
         <img
           src={imgmobile}
@@ -46,20 +46,20 @@ function Login() {
           className="w-full md:max-w-  mt-6 md:mt-0"
         />
 
-        {/* FADE MOBILE */}
+        
         <div
           className="absolute bottom-0 left-0 w-full h-32 
           bg-linear-to-b from-transparent to-slate-900 md:hidden"
         ></div>
 
-        {/* FADE DESKTOP */}
+       
         <div
           className="hidden md:block absolute top-0 right-0 h-full w-40
           bg-linear-to-r from-transparent to-slate-900"
         ></div>
       </div>
 
-      {/* LOGIN */}
+      
       <div className="w-full md:w-1/2 flex items-center justify-center px-6">
         <div className="w-full max-w-sm">
           <h1 className="text-white text-3xl font-bold text-center md:text-left mb-2">
@@ -70,7 +70,7 @@ function Login() {
             Organize. Planeje. Conquiste.
           </p>
 
-          {/* INPUTS */}
+          
           <div className="flex flex-col gap-4">
             <input
               type="email"
@@ -89,7 +89,7 @@ function Login() {
             />
           </div>
 
-          {/* BOTÃO */}
+          
           <button
             onClick={handleLogin}
             className="w-full mt-6 p-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:opacity-90"
@@ -97,7 +97,7 @@ function Login() {
             Entrar
           </button>
 
-          {/* REGISTER */}
+          
           <p className="text-center md:text-left text-sm text-slate-400 mt-6">
             Não tem uma conta?{" "}
             <span
