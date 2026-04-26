@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import imgmobile from "../assets/imagem-login.png";
+import imglogo from "../assets/imglogo.png";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -38,39 +39,36 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col md:flex-row">
-      
       <div className="relative w-full md:w-1/2 flex items-center justify-center">
         <img
           src={imgmobile}
           alt="Ilustração"
-          className="w-full md:max-w-  mt-6 md:mt-0"
+          className="w-full md:h-full md:w-full object-cover md:object-left "
         />
 
-        
         <div
           className="absolute bottom-0 left-0 w-full h-32 
           bg-linear-to-b from-transparent to-slate-900 md:hidden"
         ></div>
 
-       
         <div
-          className="hidden md:block absolute top-0 right-0 h-full w-40
+          className="hidden  md:block absolute top-0 right-0 h-full w-40
           bg-linear-to-r from-transparent to-slate-900"
         ></div>
       </div>
 
-      
-      <div className="w-full md:w-1/2 flex items-center justify-center px-6">
-        <div className="w-full max-w-sm">
-          <h1 className="text-white text-3xl font-bold text-center md:text-left mb-2">
-            Task Manager
-          </h1>
+      <div className="w-full  md:w-1/2 flex items-center justify-center px-6 ">
+        <div className="w-full max-w-sm  md:p-8 md:h-[700px] md:max-w-lg md:flex md:flex-col md:justify-center">
+          <img
+            src={imglogo}
+            alt="Logo"
+            className="w-64 mx-auto md:w-96 transition-transform duration-500 hover:scale-105"
+          />
 
-          <p className="text-slate-400 text-center md:text-left mb-6">
+          <p className="text-slate-400 text-center  mb-6">
             Organize. Planeje. Conquiste.
           </p>
 
-          
           <div className="flex flex-col gap-4">
             <input
               type="email"
@@ -89,16 +87,14 @@ function Login() {
             />
           </div>
 
-          
           <button
             onClick={handleLogin}
-            className="w-full mt-6 p-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:opacity-90"
+            className="w-full mt-6 p-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-500 text-white font-semibold hover:opacity-90 cursor-pointer"
           >
             Entrar
           </button>
 
-          
-          <p className="text-center md:text-left text-sm text-slate-400 mt-6">
+          <p className="text-center  text-sm text-slate-400 mt-6">
             Não tem uma conta?{" "}
             <span
               onClick={() => navigate("/register")}
