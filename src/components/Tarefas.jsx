@@ -138,127 +138,135 @@ function Tarefas() {
   const [openDel, setOpenDel] = useState(false);
   const [tarefaSelecionada, setTarefaSelecionada] = useState(null);
 
-  return (
-    <div className="bg-slate-900 h-screen">
-      <Header />
-      <div className=" mt-8 md:flex md:flex-row ">
-        <div className="bg-slate-800 rounded-lg m-2 p-4 gap-2 flex flex-col md:w-1/3 md:h-62  ">
-          <h2 className="text-white">Nova Tarefa</h2>
-          <input
-            className="w-full max-w-xl my-1 p-2 box-border border text-white rounded
-                      focus:outline-none focus:ring-2 focus:ring-blue-400 "
-            type="text"
-            name="pesquisar"
-            id="pesquisar"
-            placeholder="Digite o nome da tarefa"
-            value={titulo}
-            onChange={(event) => setTitulo(event.target.value)}
-          />
-          <input
-            className="text-white box-border border w-full max-w-xl my-1 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 scheme-dark"
-            type="date"
-            name=""
-            id=""
-            value={data}
-            onChange={(event) => setData(event.target.value)}
-          />
-          <div className="flex items-center justify-center mt-2">
-            <button
-              onClick={() => {
-                if (!titulo.trim() || !data.trim()) {
-                  return alert("Por favor, preencha todos os campos.");
-                }
-                onAddSubmit(titulo, data);
-                setTitulo("");
-                setData("");
-              }}
-              type="button"
-              className=" bg-blue-500 hover:bg-blue-600
-                         h-8 w-25 rounded-lg cursor-pointer"
-            >
-              Adicionar
-            </button>
-          </div>
-        </div>
-        <div className="bg-slate-800  m-2 p-4 rounded-lg space-y-6 md:w-full  ">
-          <h2 className="text-white">Minhas tarefas</h2>
-          <hr className="text-slate-300" />
-          <BuscarTarefas
-            filtro={filtro}
-            setFiltro={setFiltro}
-            buscar={buscar}
-            setBuscar={setBuscar}
-          />
-          <div className="  flex flex-col space-y-5">
-            {tarefasFiltradas.map((tarefa) => {
-              const isAtrasada =
-                tarefa.date &&
-                !tarefa.completed &&
-                new Date(tarefa.date) < new Date();
-              return (
-                <div
-                  key={tarefa.id}
-                  className=" flex justify-between items-start gap-4 border-b border-slate-300 pb-4"
-                >
-                  <div className="flex items-center gap-2 flex-1">
-                    <div className="flex flex-col gap-1">
-                      <label
-                        onClick={() => onConfClick(tarefa.id)}
-                        className={`text-white  cursor-pointer ${tarefa.completed && "line-through"}`}
-                      >
-                        {tarefa.title}
-                      </label>
-                      <div className="flex items-center gap-2 text-sm">
-                        <span className="text-sm text-slate-300 font-light">
-                          {tarefa.date
-                            ? new Date(tarefa.date).toLocaleDateString()
-                            : ""}
-                        </span>
-                        {isAtrasada && (
-                          <span className="flex items-center justify-center text-sm bg-red-500 text-white h-8 w-15 rounded-lg font-light ml-2">
-                            Atrasada
-                          </span>
-                        )}
-                        {tarefa.completed && !isAtrasada && (
-                          <span className="flex items-center justify-center text-sm bg-green-500 text-white h-8 w-18 rounded-lg font-light ml-2">
-                            Concluída
-                          </span>
-                        )}
-                        {!tarefa.completed && !isAtrasada && (
-                          <span className="flex items-center justify-center text-sm bg-yellow-500 text-white h-8 w-18 rounded-lg font-light ml-2">
-                            Pendente
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-slate-300 space-x-4 flex flex-row">
-                    <ButtonEdit tarefa={tarefa} onSave={handleSaveEdit} />
-                    <button
-                      onClick={() => {
-                        setOpenDel(true);
-                        setTarefaSelecionada(tarefa);
-                      }}
-                      className="cursor-pointer "
-                      aria-label="Excluir"
-                    >
-                      <i className="text-slate-300 fa-solid fa-trash hover:text-red-500"></i>
-                    </button>
-                    {openDel && (
-                      <ButtonDelete
-                        tarefa={tarefaSelecionada}
-                        onDelete={onDeleteClick}
-                        onClose={() => setOpenDel(false)}
-                      />
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+ return (
+   <div className="bg-slate-900 min-h-screen">
+     <Header />
+
+     <div className="mt-8 px-4 md:px-10 flex flex-col md:flex-row md:items-start gap-6">
+       {/* NOVA TAREFA */}
+       <div className="bg-slate-800/80 backdrop-blur rounded-2xl p-6 flex flex-col gap-4 md:w-1/3 shadow-lg">
+         <h2 className="text-white text-lg font-semibold">Nova Tarefa</h2>
+
+         <input
+           className="w-full p-3 rounded-lg bg-slate-900 text-white outline-none focus:ring-2 focus:ring-blue-500"
+           type="text"
+           placeholder="Digite o nome da tarefa"
+           value={titulo}
+           onChange={(event) => setTitulo(event.target.value)}
+         />
+
+         <input
+           className="w-full p-3 rounded-lg bg-slate-900 text-white outline-none focus:ring-2 focus:ring-blue-500"
+           type="date"
+           value={data}
+           onChange={(event) => setData(event.target.value)}
+         />
+
+         <button
+           onClick={() => {
+             if (!titulo.trim() || !data.trim()) {
+               return alert("Por favor, preencha todos os campos.");
+             }
+             onAddSubmit(titulo, data);
+             setTitulo("");
+             setData("");
+           }}
+           className="w-full mt-2 p-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-500 text-white font-semibold hover:opacity-90 transition cursor-pointer"
+         >
+           Adicionar
+         </button>
+       </div>
+
+       {/* LISTA */}
+       <div className="bg-slate-800/80 backdrop-blur p-6 rounded-2xl space-y-6 md:w-full shadow-lg">
+         <h2 className="text-white text-xl font-semibold">Minhas tarefas</h2>
+
+         <BuscarTarefas
+           filtro={filtro}
+           setFiltro={setFiltro}
+           buscar={buscar}
+           setBuscar={setBuscar}
+         />
+
+         <div className="flex flex-col gap-4">
+           {tarefasFiltradas.map((tarefa) => {
+             const isAtrasada =
+               tarefa.date &&
+               !tarefa.completed &&
+               new Date(tarefa.date) < new Date();
+
+             return (
+               <div
+                 key={tarefa.id}
+                 className="flex justify-between items-start gap-4 bg-slate-900/70 p-4 rounded-xl hover:bg-slate-700 transition-all duration-200"
+               >
+                 <div className="flex flex-col gap-2 flex-1">
+                   <label
+                     onClick={() => onConfClick(tarefa.id)}
+                     className={`text-white cursor-pointer text-lg ${
+                       tarefa.completed && "line-through text-slate-400"
+                     }`}
+                   >
+                     {tarefa.title}
+                   </label>
+
+                   <div className="flex items-center gap-2 text-sm">
+                     <span className="text-slate-400">
+                       {tarefa.date
+                         ? new Date(tarefa.date).toLocaleDateString()
+                         : ""}
+                     </span>
+
+                     {/* STATUS */}
+                     {isAtrasada && (
+                       <span className="px-3 py-1 text-xs rounded-full bg-red-500/20 text-red-400">
+                         Atrasada
+                       </span>
+                     )}
+
+                     {tarefa.completed && !isAtrasada && (
+                       <span className="px-3 py-1 text-xs rounded-full bg-green-500/20 text-green-400">
+                         Concluída
+                       </span>
+                     )}
+
+                     {!tarefa.completed && !isAtrasada && (
+                       <span className="px-3 py-1 text-xs rounded-full bg-yellow-500/20 text-yellow-400">
+                         Pendente
+                       </span>
+                     )}
+                   </div>
+                 </div>
+
+                 {/* AÇÕES */}
+                 <div className="flex items-center gap-4 text-slate-400">
+                   <ButtonEdit tarefa={tarefa} onSave={handleSaveEdit} />
+
+                   <button
+                     onClick={() => {
+                       setOpenDel(true);
+                       setTarefaSelecionada(tarefa);
+                     }}
+                     className="hover:text-red-500 transition cursor-pointer"
+                   >
+                     <i className="fa-solid fa-trash"></i>
+                   </button>
+
+                   {openDel && (
+                     <ButtonDelete
+                       tarefa={tarefaSelecionada}
+                       onDelete={onDeleteClick}
+                       onClose={() => setOpenDel(false)}
+                     />
+                   )}
+                 </div>
+               </div>
+             );
+           })}
+         </div>
+       </div>
+     </div>
+   </div>
+ );
 }
 export default Tarefas;

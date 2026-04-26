@@ -1,31 +1,30 @@
-import {useState, useEffect} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
+import imgmobile from "../assets/imagem-login.png";
+import imglogo from "../assets/imglogo.png";
 
 function Register() {
   const [name, setName] = useState("");
-  const [email, setEmail] =useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
-      console.log({ name, email, password });
+      
+
       const response = await fetch("http://localhost:3001/register", {
         method: "POST",
         headers: {
-          "content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ name, email, password }),
       });
+
       const data = await response.json();
-      console.log(data);
 
       if (response.ok) {
-        console.log("Usuario criado com sucesso!");
-
         if (data.token) {
           localStorage.setItem("token", data.token);
           navigate("/");
@@ -33,7 +32,7 @@ function Register() {
           navigate("/login");
         }
       } else {
-        alert(data.massage || "Erro ao cadastrar");
+        alert(data.message || "Erro ao cadastrar");
       }
     } catch (error) {
       console.error("Erro:", error);
@@ -41,55 +40,86 @@ function Register() {
     }
   };
 
+  return (
+    <div className="min-h-screen bg-slate-900 flex flex-col md:flex-row">
+      
+      <div className="relative w-full md:w-1/2 flex items-center justify-center">
+        <img
+          src={imgmobile}
+          alt="Ilustração"
+          className="w-full md:h-full md:w-full object-cover md:object-left"
+        />
 
+       
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-linear-to-b from-transparent to-slate-900 md:hidden"></div>
 
-    return (
-      <div className="bg-slate-900 h-screen flex items-center justify-center">
-        <div className="bg-slate-800 flex flex-col items-center justify-center gap-4 p-2 w-80 rounded-lg ">
-          <h1 className="text-white text-2xl font-semibold ">Cadastre-se</h1>
-          <div className="p-4 flex flex-col gap-4 w-full  ">
-            <input 
-            type="text" 
-            name="nome" 
-            id="" 
-            placeholder="Digite seu nome" 
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-             className=" max-w-xl p-2 box-border border text-white rounded
-             focus:outline-none focus:ring-2 focus:ring-blue-400 " />
+       
+        <div className="hidden md:block absolute top-0 right-0 h-full w-40 bg-linear-to-r from-transparent to-slate-900"></div>
+      </div>
+
+     
+      <div className="w-full md:w-1/2 flex items-center justify-center px-6">
+        <div className="w-full max-w-sm md:p-8 md:h-[700px] md:max-w-lg md:flex md:flex-col md:justify-center">
+          
+          <img
+            src={imglogo}
+            alt="Logo"
+            className="w-64 mx-auto md:w-96 transition-transform duration-500 hover:scale-105"
+          />
+
+          <p className="text-slate-400 text-center mb-6">
+            Crie sua conta e comece a se organizar 🚀
+          </p>
+
+          
+          <div className="flex flex-col gap-4">
+            <input
+              type="text"
+              placeholder="Digite seu nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="p-3 rounded-lg bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
             <input
               type="email"
-              name="Email"
-              id="Email"
-              placeholder="Digite um email"
+              placeholder="Digite seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className=" max-w-xl p-2 box-border border text-white rounded
-              focus:outline-none focus:ring-2 focus:ring-blue-400 "
+              className="p-3 rounded-lg bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
             />
+
             <input
               type="password"
-              name="Password"
-              id="Password"
-              placeholder="Digite uma senha"
+              placeholder="Digite sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className=" max-w-xl  p-2 box-border border text-white rounded
-              focus:outline-none focus:ring-2 focus:ring-blue-400 "
+              className="p-3 rounded-lg bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
+         
           <button
-          onClick={handleRegister}
-           type="button" 
-           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            onClick={handleRegister}
+            className="w-full mt-6 p-3 rounded-lg bg-linear-to-r from-blue-500 to-purple-500 text-white font-semibold hover:opacity-90 cursor-pointer"
+          >
             Cadastrar
           </button>
 
-          <p className="text-white text-sm ">Já tem uma conta? <a href="/login" className="text-blue-400 hover:underline">Faça login</a></p>
+          
+          <p className="text-center text-sm text-slate-400 mt-6">
+            Já tem uma conta?{" "}
+            <span
+              onClick={() => navigate("/login")}
+              className="text-blue-400 cursor-pointer hover:underline"
+            >
+              Entrar
+            </span>
+          </p>
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default Register;

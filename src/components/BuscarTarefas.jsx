@@ -24,7 +24,7 @@ function BuscarTarefas({filtro, setFiltro, buscar, setBuscar}) {
             onClick={() => setFiltro("todos")}
             className={
               filtro === "todos"
-                ? "h-8 w-20 rounded-lg cursor-pointer bg-blue-500 text-white"
+                ? "h-8 w-20 rounded-lg cursor-pointer bg-blue-500 to-purple-500 hover:opacity-90 transition text-white"
                 : "bg-slate-700 h-8 w-20 rounded-lg cursor-pointer"
             }
           >
