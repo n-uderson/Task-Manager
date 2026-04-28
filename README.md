@@ -1,16 +1,90 @@
-# React + Vite
+# 🎨 Task Manager Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web para o sistema de gerenciamento de tarefas, consumindo a API do backend.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Descrição
 
-## React Compiler
+Este projeto é o frontend da aplicação Task Manager. Ele permite que usuários se registrem, façam login e gerenciem suas tarefas através de uma interface amigável.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tecnologias utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* React
+* Vite
+* JavaScript
+* Tailwind
+
+---
+
+## ⚙️ Como rodar o projeto
+
+### 🔧 1. Clonar o repositório
+
+```bash
+git clone https://github.com/seu-usuario/task-manager-front.git
+cd task-manager-front
+```
+
+### 📦 2. Instalar dependências
+
+```bash
+npm install
+```
+
+### ▶️ 3. Rodar o projeto
+
+```bash
+npm run dev
+```
+
+Aplicação rodando em:
+http://localhost:5173
+
+---
+
+## 🌐 Integração com API
+
+A aplicação consome a API do backend hospedada em:
+
+https://backand-taskmanager.onrender.com
+
+---
+
+## 🔐 Funcionalidades
+
+* Cadastro de usuário
+* Login com autenticação JWT
+* Listagem de tarefas
+* Criação de tarefas
+* Edição de tarefas
+* Exclusão de tarefas
+
+---
+
+## 📁 Estrutura do projeto
+
+```
+src/
+ ├── components/
+ ├── pages/
+ ├── services/
+ ├── App.jsx
+ └── main.jsx
+```
+
+---
+
+## ⚠️ Observações
+
+* Certifique-se de que o backend está rodando corretamente
+* Verifique se a URL da API está configurada corretamente no projeto
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por Natan Uderson 🚀
+
