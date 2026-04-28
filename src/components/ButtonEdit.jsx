@@ -3,7 +3,9 @@ import React, { useState } from "react";
 function ButtonEdit({ tarefa, onSave, data }) {
   const [editOpen, setEditOpen] = useState(false);
   const [draft, setDraft] = useState(tarefa?.title ?? "");
-  const [draftData, setDraftData] = useState(tarefa?.date ?? "");
+  const [draftData, setDraftData] = useState(
+    tarefa?.date ? tarefa.date.split("T")[0] : "",
+  );
 
   const saveEdit = () => {
     if (draft.trim() && draftData.trim()) {

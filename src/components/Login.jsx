@@ -11,7 +11,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:3001/login", {
+      const response = await fetch("https://backand-taskmanager.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function Login() {
       </div>
 
       <div className="w-full  md:w-1/2 flex items-center justify-center px-6 ">
-        <div className="w-full max-w-sm  md:p-8 md:h-[700px] md:max-w-lg md:flex md:flex-col md:justify-center">
+        <div className="w-full max-w-sm  md:p-8 md:h-175 md:max-w-lg md:flex md:flex-col md:justify-center">
           <img
             src={imglogo}
             alt="Logo"
