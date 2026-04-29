@@ -217,7 +217,7 @@ function Tarefas() {
 
           <div className="flex flex-col gap-4">
             {tarefasFiltradas.map((tarefa) => {
-              console.log("DATE RAW:", tarefa.date);
+              
               const hoje = new Date().toISOString().split("T")[0];
 
               const dataTarefa = tarefa.date?.split("T")[0];
