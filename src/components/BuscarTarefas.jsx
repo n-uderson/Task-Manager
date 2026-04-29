@@ -35,8 +35,8 @@ function BuscarTarefas({filtro, setFiltro, buscar, setBuscar}) {
             onClick={() => setFiltro("pendentes")}
             className={
               filtro === "pendentes"
-                ? "h-8 w-25 rounded-lg cursor-pointer bg-blue-500 text-white"
-                : "bg-slate-700 h-8 w-25 rounded-lg cursor-pointer"
+                ? "h-8 md:w-25 w-30 rounded-lg cursor-pointer bg-blue-500 text-white"
+                : "bg-slate-700 h-8 md:w-25 w-30 rounded-lg cursor-pointer"
             }
           >
             Pendentes
@@ -47,8 +47,8 @@ function BuscarTarefas({filtro, setFiltro, buscar, setBuscar}) {
             onClick={() => setFiltro("concluidas")}
             className={
               filtro === "concluidas"
-                ? "h-8 w-25 rounded-lg cursor-pointer bg-blue-500 text-white"
-                : "bg-slate-700 h-8 w-25 rounded-lg cursor-pointer"
+                ? "h-8 md:w-25 w-30 rounded-lg cursor-pointer bg-blue-500 text-white"
+                : "bg-slate-700 h-8 md:w-25 w-30 rounded-lg cursor-pointer"
             }
           >
             Concluídas
@@ -59,8 +59,8 @@ function BuscarTarefas({filtro, setFiltro, buscar, setBuscar}) {
             onClick={() => setFiltro("atrasadas")}
             className={
               filtro === "atrasadas"
-                ? "h-8 w-25 rounded-lg cursor-pointer bg-blue-500 text-white"
-                : "bg-slate-700 h-8 w-25 rounded-lg cursor-pointer"
+                ? "h-8 md:w-25 w-30 rounded-lg cursor-pointer bg-blue-500 text-white"
+                : "bg-slate-700 h-8 md:w-25 w-30 rounded-lg cursor-pointer"
             }
           >
             Atrasadas

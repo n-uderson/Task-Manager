@@ -83,8 +83,7 @@ function Tarefas() {
   // Adiciona uma nova tarefa na lista de tarefas
   async function onAddSubmit(titulo, data) {
     try {
-      console.log("TITULO:", titulo);
-      console.log("DATA:", data);
+      
 
       // 👇 PROTEÇÃO REAL (ESSENCIAL)
       if (!titulo.trim() || !data) {
@@ -188,8 +187,7 @@ function Tarefas() {
 
           <button
             onClick={() => {
-              console.log("TITULO:", titulo);
-              console.log("DATA:", data);
+              
 
               if (!titulo.trim() || !data) {
                 return alert("Por favor, preencha todos os campos.");
